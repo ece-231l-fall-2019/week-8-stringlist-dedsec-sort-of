@@ -45,10 +45,13 @@ StringList::void push_front(std::string str)
 
 StringList::void pop_front()
 {
-	llist *front = _data;
-	_data = front->next;
-	delete front;
-	_size--;
+	llist* savePtr = _data;
+	_data = _data->next;
+	if(_data)
+	_data->prev = _data->prev->prev;
+	else
+		_dataL = 0;
+	delete savePtr;
 }
 
 StringList::void pop_back(std::string str)
@@ -58,21 +61,19 @@ StringList::void pop_back(std::string str)
 }
 StringList::void unique() 
 {
-	llist *temp = _data;
-	for( int i = 0; i < this.size(); i++ )
+	for (llist *ptr = _data; ptr != 0; ptr = ptr->next)
 	{
-		std::string tempD = temp -> str;
-		if (tempD == temp->next->str)
+		while (ptr -> next != 0 && ptr->str == ptr->next->str)
 		{
-			if (temp->next->next != NULL)
-				temp->next = temp->next->next;
-			temp->next->previous = temp;
-			delete temp->next;
-			i--;
-		}
-		else 
-		{
-			temp = temp->next;
+			llist *savePtr = ptr->next;
+			ptr->next = savePtr->next;
+			if(savePtr->next != 0)
+			savePtr->next->prev = ptr;
+			else
+				_dataL = ptr;
+			delete savePtr;
+			_size--;
+
 		}
 	}
 }
@@ -81,9 +82,17 @@ StringList:: void push_back(std::string str)
 {
 	llist *newItem = new llist;
 	newItem->str = str;
+	newItem->next = 0;
 	newItem->prev = _dataL;
 	_dataL = newItem;
-											        }
+	if (_dataL != 0)
+		_dataL->next = newItem;
+	if (_data == 0)
+		_data = newItem;
+	_dataL = newItem;
+	_size++;
+
+}
 
 bool empty() const
 {
