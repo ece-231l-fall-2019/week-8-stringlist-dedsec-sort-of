@@ -1,7 +1,13 @@
 #include <iostream>
 #include <string>
-#include <vector>
 #include "StringList.h"
+
+StringList::StringList()
+{
+ _data = 0;
+_dataL = 0;
+_size = 0;
+}
 
 StringList::StringList(const StringList& other)
 {
@@ -9,57 +15,74 @@ StringList::StringList(const StringList& other)
 }
 
 
- ~StringList()
+StringList::~StringList()
 {
 	while(!empty())
-	pop_front()
+	pop_front();
 }
 
-std::string& front()
+std::string& StringList::front()
 {
 	return _data->str;
 }
 
-StringList::void clear()
+void StringList::clear()
 {
-	while( empty() == false) 
-	{
-		pop_back();
-	}
-	size = 0;
+	while( !empty())
+	       pop_front();	
+	
 }
-StringList::string& back()
+std::string& StringList::back()
 {
-	return _dataL;
+	return _dataL->str
 }
 
-StringList::void push_front(std::string str)
+void StringList::push_front(std::string str)
 {
 	llist *newItem = new llist;
 	newItem->str = str;
 	newItem->next = _data;
+	newItem->prev = NULL;
+	if (_data != NULL)
+		_data->prev = newItem;
+	if( _dataL == NULL)
+		_dataL = newItem;
 	_data = newItem;
+	_size++;
 }
 
 
 
-StringList::void pop_front()
+void StringList::pop_front()
 {
-	llist* savePtr = _data;
-	_data = _data->next;
-	if(_data)
-	_data->prev = _data->prev->prev;
-	else
-		_dataL = 0;
-	delete savePtr;
+	if (!empty())
+	{
+		llist *ptr = _data;
+		_data = _data->next;
+		if (_data!= NULL)
+			_data->prev = _data->prev->prev;
+		else
+			_dataL = NULL;
+		delete ptr;
+		_size--;
+	}
 }
 
-StringList::void pop_back(std::string str)
+void StringList::pop_back()
 {
-	delete this.back();
-	_size--;
+	if (!empty())
+	{
+		llist *ptr = _dataL;
+		_dataL = _dataL->prev;
+		if(_dataL != NULL)
+			_dataL->next = _dataL ->next->next;
+		else
+			_data = NULL;
+		delete ptr;
+		_size--;
+	}
 }
-StringList::void unique() 
+void StringList::unique() 
 {
 	for (llist *ptr = _data; ptr != 0; ptr = ptr->next)
 	{
@@ -77,8 +100,11 @@ StringList::void unique()
 		}
 	}
 }
-StringList::void size() { return _size; }
-StringList:: void push_back(std::string str)
+size_t StringList::size() const
+{
+	return _size; 
+}
+void StringList::push_back(std::string str)
 {
 	llist *newItem = new llist;
 	newItem->str = str;
@@ -97,4 +123,20 @@ StringList:: void push_back(std::string str)
 bool empty() const
 {
 	return _data == 0;
+}
+//----------------------return function-----------------------------
+StringList::llist *StringList::getdata() const
+{
+	return _data;
+}
+StringList::llist *StringList::getdatal() const
+{
+	return _dataL;
+}
+//---------------------printer------------------------------------------
+void StringList::printp()
+{
+	for (llist *ptr = _head; ptr != NULL; ptr = ptr->next)
+		std::cout << ptr->str << " ";
+	std::cout << std::endl;
 }

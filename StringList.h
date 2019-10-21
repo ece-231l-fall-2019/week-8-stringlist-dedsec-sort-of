@@ -4,7 +4,7 @@
 class StringList
 {
 	private:
-
+	size_t _size;
 	typedef struct llist {
 		std::string str;
 		struct llist *next;
@@ -13,17 +13,13 @@ class StringList
 
 	llist *_data;
 	llist *_dataL;
-	int _size;
+
 
 	public:
 	
 	// default constructor
-	StringList()
-	{
-		_data = 0;
-		_dataL = 0;
-		_size = 0;
-	}
+	StringList();
+
 
 	// copy constructor
 	StringList(const StringList& other);
@@ -36,19 +32,27 @@ class StringList
 
 	std::string& front();
 
-	StringList::void push_front(std::string str):
+	void push_front(std::string str):
 
-	StringList::void pop_front();
+	void pop_front();
 
 	bool empty() const;
 	
-		StringList::void clear();
-		StringList::void back();
-		StringList::void pop_back (std::string str);
-		StringList::void unique();
+		void clear();
+		std::string& back();
+		void pop_back ();
+		void unique();
 		//missing
-		StringList::void size();
-		StringList::void push_back();
-		StringList::void reverse();
+		size_t size() const;
+		void push_back(std::string str);
+		void reverse();
+
+//---------------return function--------------------------------
+		StringList::llist *getdata()const;
+		StringList::llist *getdatal()const;
+//------------------printer------------------------------------
+		void printp();
+
 };
+
 
