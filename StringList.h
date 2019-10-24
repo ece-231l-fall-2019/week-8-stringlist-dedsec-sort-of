@@ -32,7 +32,7 @@ class StringList
 
 	std::string& front();
 
-	void push_front(std::string str):
+	void push_front(std::string str);
 
 	void pop_front();
 

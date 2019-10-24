@@ -11,7 +11,7 @@ _size = 0;
 
 StringList::StringList(const StringList& other)
 {
-	this = other;
+	*this = other;
 }
 
 
@@ -34,7 +34,7 @@ void StringList::clear()
 }
 std::string& StringList::back()
 {
-	return _dataL->str
+	return _dataL->str;
 }
 
 void StringList::push_front(std::string str)
@@ -120,7 +120,7 @@ void StringList::push_back(std::string str)
 
 }
 
-bool empty() const
+bool empty() 
 {
 	return _data == 0;
 }

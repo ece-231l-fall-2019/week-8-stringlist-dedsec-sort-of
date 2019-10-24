@@ -36,12 +36,12 @@ int main()
 	Assert(a.size() == 5, "size method");
 
 	Assert(a.front() == "D", "front method");
-	a.push_front();
+	a.pop_front();
 	Assert(a.front() == "C", "pop_front method");
 	Assert(a.back() == "E", "back method");
 	a.pop_back();
 	Assert(a.back() == "B", "pop_back method");
-	a.push_front();
+	a.pop_front();
 	Assert(a.front() == "A", "front method");
 	a.pop_back();
 	Assert(a.back() == "A", "back method");
