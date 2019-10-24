@@ -62,7 +62,7 @@ int main()
 	t.push_back("C");
 
 	Assert(t.size() == 13, "Testing...");
-	t.printp();
+	//t.printp();
 	return 0;
 }
 

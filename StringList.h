@@ -28,7 +28,8 @@ class StringList
 	~StringList();
 
 	// copy operator
-	StringList& operator=(const StringList&);
+	StringList& operator= (std::string str);
+
 
 	std::string& front();
 
@@ -36,7 +37,7 @@ class StringList
 
 	void pop_front();
 
-	bool empty() const;
+	bool empty();
 	
 		void clear();
 		std::string& back();
@@ -51,7 +52,8 @@ class StringList
 		StringList::llist *getdata()const;
 		StringList::llist *getdatal()const;
 //------------------printer------------------------------------
-		void printp();
+	//	void printp();
+
 
 };
 

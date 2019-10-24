@@ -4,7 +4,7 @@
 
 StringList::StringList()
 {
- _data = 0;
+_data = 0;
 _dataL = 0;
 _size = 0;
 }
@@ -100,6 +100,15 @@ void StringList::unique()
 		}
 	}
 }
+StringList& StringList::operator= (std::string str)
+
+{
+	llist *ptr = new llist;
+	for (ptr = _data; ptr!= 0; ptr = ptr -> next)
+		push_front(ptr -> str);
+	return *this;
+}
+
 size_t StringList::size() const
 {
 	return _size; 
@@ -110,7 +119,6 @@ void StringList::push_back(std::string str)
 	newItem->str = str;
 	newItem->next = 0;
 	newItem->prev = _dataL;
-	_dataL = newItem;
 	if (_dataL != 0)
 		_dataL->next = newItem;
 	if (_data == 0)
@@ -120,9 +128,12 @@ void StringList::push_back(std::string str)
 
 }
 
-bool empty() 
+bool StringList::empty() 
 {
-	return _data == 0;
+	if (_data == 0)
+		return true;
+	else 
+		return false;
 }
 //----------------------return function-----------------------------
 StringList::llist *StringList::getdata() const
@@ -134,9 +145,9 @@ StringList::llist *StringList::getdatal() const
 	return _dataL;
 }
 //---------------------printer------------------------------------------
-void StringList::printp()
-{
-	for (llist *ptr = _head; ptr != NULL; ptr = ptr->next)
-		std::cout << ptr->str << " ";
-	std::cout << std::endl;
-}
+//void StringList::printp()
+//{
+//	for (llist *ptr = _data; ptr != NULL; ptr = ptr->next)
+//		std::cout << ptr->str << " ";
+//	std::cout << std::endl;
+//}
