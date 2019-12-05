@@ -62,6 +62,20 @@ int main()
 	t.push_back("C");
 
 	Assert(t.size() == 13, "Testing...");
+	Assert(t.empty() == false, "Empty method");
+	t.clear();
+	Assert(t.empty() == true, "Clear Method");
+
+	StringList f;
+	f.push_back("First");
+	f.push_back("Second");
+	f.push_back("Third");
+	f.push_back("Fourth");
+	f.push_back("Fifth");
+	f.push_back("Sixth");
+	Assert(f.front() == "First", "first string is First");
+	f.reverse();
+	Assert(f.front() == "Sixth", "Reverse Method");
 	//t.printp();
 	return 0;
 }

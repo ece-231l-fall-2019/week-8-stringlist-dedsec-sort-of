@@ -100,6 +100,11 @@ void StringList::unique()
 		}
 	}
 }
+/*void StringList::reverse()
+{
+	for (llist *ptr = _data; ptr != 0; ptr = ptr
+}
+*/
 StringList& StringList::operator= (std::string str)
 
 {
@@ -111,8 +116,20 @@ StringList& StringList::operator= (std::string str)
 
 size_t StringList::size() const
 {
-	return _size; 
+	 size_t count = 0;
+	 if (_data == NULL)
+                         return count;
+                 if (_data == _dataL)
+                 {
+                         count++;
+                         return count;
+                 }
+ 
+                 for (llist *temp = _data; temp != NULL;temp= temp->next, count++){} 
+                 return count;
+ 
 }
+
 void StringList::push_back(std::string str)
 {
 	llist *newItem = new llist;

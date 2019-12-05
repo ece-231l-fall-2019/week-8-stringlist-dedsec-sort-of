@@ -6,9 +6,9 @@ class StringList
 	private:
 	size_t _size;
 	typedef struct llist {
-		std::string str;
-		struct llist *next;
-		struct llist *prev;
+	std::string str;
+	struct llist *next;
+	struct llist *prev;
 	} llist;
 
 	llist *_data;
@@ -46,7 +46,27 @@ class StringList
 		//missing
 		size_t size() const;
 		void push_back(std::string str);
-		void reverse();
+
+		void reverse()
+		{
+         	if ( size() <= 1)
+                         return;
+         	llist *end = _data;
+         	llist *temp;
+         	while (end != NULL)
+         	{
+                 temp = end->prev;
+                 end->prev = end->next;
+                 end->next = temp;
+                 end = end->prev;
+         	}
+
+                 if (temp)
+                         temp = temp->prev;
+                 _dataL = _data;
+                 _data = temp;
+        	 }
+
 
 //---------------return function--------------------------------
 		StringList::llist *getdata()const;
